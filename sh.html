@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Calculadora</title>
+    <style>
+        body {
+            background: linear-gradient(to right, purple, black);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            flex-direction: column; /* Alineamos los elementos verticalmente */
+            font-family: Arial, sans-serif; /* Establecemos la fuente */
+        }
+
+        .heading {
+            font-size: 36px;
+            color: white;
+            animation: fadeInUp 1s ease; /* Animación de entrada */
+        }
+
+        .subtext {
+            font-size: 20px;
+            color: white;
+            margin-top: 20px;
+            animation: fadeInDown 1s ease; /* Animación de entrada */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .calculator {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 20px;
+            border: 2px solid #ddd;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-top: 20px; /* Añadimos margen arriba para separar el encabezado */
+            max-width: 90%; /* Limitamos el ancho para dispositivos móviles */
+        }
+
+        /* Botones */
+        .display {
+            width: 100%;
+            margin: 0 auto; /* Centramos el display horizontalmente */
+            margin-bottom: 20px;
+            padding: 20px;
+            font-size: 32px;
+            text-align: right;
+            box-sizing: border-box; /* Incluimos el padding en el ancho total */
+        }
+
+        button {
+            padding: 20px;
+            font-size: 24px;
+            border: none;
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s;
+            width: calc(25% - 10px); /* Ajustamos el ancho de los botones */
+            margin: 5px; /* Añadimos un pequeño margen entre los botones */
+        }
+
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Animaciones */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 class="heading">Calculadora</h1>
+    <div class="container">
+        <p class="subtext">Realiza tus cálculos aquí</p>
+        <div class="calculator">
+            <input type="text" class="display" id="display" disabled>
+            <div class="keys">
+                <!-- Botones de la calculadora -->
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button onclick="appendToDisplay('+')">+</button>
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button onclick="appendToDisplay('-')">-</button>
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button onclick="appendToDisplay('*')">*</button>
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="appendToDisplay('.')">.</button>
+                <button onclick="clearLast()">C</button> <!-- Cambiamos la función a clearLast -->
+                <button onclick="calculate()">=</button>
+                <button onclick="appendToDisplay('/')">/</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        function clearLast() {
+            let currentValue = document.getElementById('display').value;
+            document.getElementById('display').value = currentValue.slice(0, -1); // Borra el último carácter
+        }
+
+        function calculate() {
+            try {
+                document.getElementById('display').value = eval(document.getElementById('display').value);
+            } catch(error) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
